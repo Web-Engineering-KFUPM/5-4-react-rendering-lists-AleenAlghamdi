@@ -26,8 +26,9 @@ export default function CourseCard({ course, index, onMutateCourse }) {
     // TODO: append it to existing tasks and reset inputs
   }
 
+    const allTasksDone = course.tasks.length > 0 && course.tasks.every(task => task.isDone);
 
-  return (
+    return (
     <article className="course card">
       <header className="cardHeader">
         <h2>{course.title}</h2>
