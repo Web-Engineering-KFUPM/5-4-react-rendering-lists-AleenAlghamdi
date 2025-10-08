@@ -10,12 +10,18 @@ export default function CourseCard({ course, index, onMutateCourse }) {
   // 📘 TASK 4 — PART A (Anchor): Implement toggle using onMutateCourse + .map()
   function toggleTask(id) {
     // TODO: toggle the task with this id
+      onMutateCourse(index, (tasks) =>
+          tasks.map((task) =>
+              task.id === id ? { ...task, isDone: !task.isDone } : task
+          )
+      );
   }
 
 
   // 📘 TASK 4 — PART A (Anchor): Implement delete using onMutateCourse + .filter()
   function deleteTask(id) {
     // TODO: delete the task with this id
+      onMutateCourse(index, (tasks) => tasks.filter((task) => task.id !== id));
   }
 
 
@@ -24,6 +30,18 @@ export default function CourseCard({ course, index, onMutateCourse }) {
     e.preventDefault();
     // TODO: create a new task { id, title, dueDate: date, isDone: false }
     // TODO: append it to existing tasks and reset inputs
+      if (!title.trim()) return;
+
+      const newTask = {
+          id: Date.now(),
+          title: title.trim(),
+          dueDate: date,
+          isDone: false,
+      };
+
+      onMutateCourse(index, (tasks) => [...tasks, newTask]);
+      setTitle("");
+      setDate("");
   }
 
     const allTasksDone = course.tasks.length > 0 && course.tasks.every(task => task.isDone);

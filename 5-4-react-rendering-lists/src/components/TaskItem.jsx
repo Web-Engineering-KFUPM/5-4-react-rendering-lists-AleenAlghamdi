@@ -6,7 +6,11 @@ return (
 <li className="task" key={task.id}>
 <label className="taskMain">
 {/* 🟩 PART B (Anchor): Checkbox exists; students should wire onToggle(task.id) */}
-<input type="checkbox" />
+    <input
+        type="checkbox"
+        checked={task.isDone}
+        onChange={() => onToggle(task.id)}
+    />
 
 
 {/* 🟩 PART B (Anchor): Only render <DueBadge /> if task is NOT done (logical &&) */}
@@ -22,7 +26,12 @@ return (
 
 
 {/* 🟩 PART B (Anchor): Delete button should call onDelete(task.id) */}
-<button className="ghost" aria-label="Delete task">
+<button
+    className="ghost"
+    aria-label="Delete task"
+    onClick={() => onDelete(task.id)}
+    type="button"
+>
 ✕
 </button>
 </li>
